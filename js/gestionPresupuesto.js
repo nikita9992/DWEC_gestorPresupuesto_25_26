@@ -10,13 +10,13 @@ function actualizarPresupuesto(presupuesto) {
     }
     else
     {
-        alert("Error: Numero negativo")
+        console.log("Error: Numero negativo")
         return -1;
     }
 }
 
 function mostrarPresupuesto() {
-
+    return "Tu presupuesto actual es de X €";
 }
 
 function CrearGasto() {
