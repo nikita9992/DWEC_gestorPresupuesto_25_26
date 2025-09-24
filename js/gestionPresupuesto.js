@@ -5,7 +5,7 @@
 let presupuesto = 0;
 
 function actualizarPresupuesto(nuevoPresupuesto) {
-    if(typeof nuevoPresupuesto === "number" && !isNaN(nuevoPresupuesto) && nuevoPresupuesto >= 0)
+    if(!isNaN(nuevoPresupuesto) && nuevoPresupuesto >= 0)
     {
         presupuesto = nuevoPresupuesto  
         return presupuesto;
@@ -22,7 +22,15 @@ function mostrarPresupuesto() {
 }
 
 function CrearGasto(descripcion, valor) {
-    // TODO
+    if (!isNaN(valor) && valor >= 0)
+    {
+        this.valor = valor;
+    }
+    else
+    {
+        this.valor = 0;
+    }
+    this.descripcion = descripcion;
 }
 
 // NO MODIFICAR A PARTIR DE AQUÍ: exportación de funciones y objetos creados para poder ejecutar los tests.
