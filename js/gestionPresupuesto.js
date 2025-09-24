@@ -1,11 +1,13 @@
+"use strict"
 // TODO: Crear las funciones, objetos y variables indicadas en el enunciado
 
 // TODO: Variable global
 let presupuesto = 0;
 
-function actualizarPresupuesto(presupuesto) {
-    if(presupuesto >= 0)
+function actualizarPresupuesto(nuevoPresupuesto) {
+    if(typeof nuevoPresupuesto === "number" && !isNaN(nuevoPresupuesto) && nuevoPresupuesto >= 0)
     {
+        presupuesto = nuevoPresupuesto  
         return presupuesto;
     }
     else
@@ -16,10 +18,10 @@ function actualizarPresupuesto(presupuesto) {
 }
 
 function mostrarPresupuesto() {
-    return ("Tu presupuesto actual es de " + presupuesto + " €");
+    return `Tu presupuesto actual es de ${presupuesto} €`;
 }
 
-function CrearGasto() {
+function CrearGasto(descripcion, valor) {
     // TODO
 }
 
