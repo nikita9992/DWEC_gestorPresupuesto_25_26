@@ -39,7 +39,6 @@ function CrearGasto(descripcion, valor) {
     this.actualizarDescripcion = function(nuevoDescripcion)
     {
         this.descripcion = nuevoDescripcion;
-        return this.descripcion;
     }
     this.actualizarValor = function(nuevoValor)
     {
@@ -47,7 +46,6 @@ function CrearGasto(descripcion, valor) {
         {
             this.valor = nuevoValor;
         }
-        return this.valor;
     }
 }
 
