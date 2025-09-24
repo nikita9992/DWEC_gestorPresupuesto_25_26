@@ -34,7 +34,7 @@ function CrearGasto(descripcion, valor) {
 
     this.mostrarGasto = function()
     {
-        return `Gasto correspondiente a ${descripcion} con valor ${valor} €`;
+        return `Gasto correspondiente a ${this.descripcion} con valor ${this.valor} €`;
     }
     this.actualizarDescripcion = function(nuevoDescripcion)
     {
