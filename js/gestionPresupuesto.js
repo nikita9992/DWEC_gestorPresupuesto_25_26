@@ -100,6 +100,14 @@ function CrearGasto(descripcion, valor, fecha, ...listaEtiquetas) {
         }
         return `${this.mostrarGasto()}.\nFecha: ${fechaGasto}\nEtiquetas:\n${textoEtiquetas}`
     }
+    this.actualizarFecha = function(nuevaFecha)
+    {
+        let fechaAct = Date.parse(nuevaFecha);
+        if(!isNaN(fechaAct))
+        {
+            this.fecha = fechaAct;
+        }
+    }
 }
 
 function listarGastos()
