@@ -54,18 +54,17 @@ function CrearGasto(descripcion, valor, fecha, ...listaEtiquetas) {
     {
         for (let i=0; i < nuevasEtiquetas.length; i++)
         {
-            let etiquetaActual = nuevasEtiquetas[i];
             let etiquetaExiste = false;
             for (let j=0; j < this.etiquetas.length && !etiquetaExiste; j++)
             {
-                if (this.etiquetas[j] == etiquetaActual)
+                if (this.etiquetas[j] == nuevasEtiquetas[i])
                 {
                     etiquetaExiste = true;
                 }
             }
             if(!etiquetaExiste)
             {
-                this.etiquetas.push(etiquetaActual);
+                this.etiquetas.push(nuevasEtiquetas[i]);
             }
         }
     }
@@ -106,6 +105,21 @@ function CrearGasto(descripcion, valor, fecha, ...listaEtiquetas) {
         if(!isNaN(fechaAct))
         {
             this.fecha = fechaAct;
+        }
+    }
+    this.borrarEtiquetas = function(...etiquetasBorrar)
+    {
+        for (let i = 0; i < etiquetasBorrar.length; i++)
+        {
+            let etiquetaExiste = false;
+            for (let j = 0; j < this.etiquetas.length && !etiquetaExiste; j++)
+            {
+                if (this.etiquetas[j] == etiquetasBorrar[i])
+                {
+                    etiquetaExiste = true;
+                    this.etiquetas.splice(j, 1)
+                }
+            }
         }
     }
 }
