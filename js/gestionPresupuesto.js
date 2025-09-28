@@ -90,6 +90,16 @@ function CrearGasto(descripcion, valor, fecha, ...listaEtiquetas) {
             this.valor = nuevoValor;
         }
     }
+    this.mostrarGastoCompleto = function()
+    {
+        let fechaGasto = new Date(this.fecha).toLocaleString();
+        let textoEtiquetas = ``;
+        for (let i = 0; i < this.etiquetas.length; i++)
+        {
+            textoEtiquetas += `- ${this.etiquetas[i]}\n`
+        }
+        return `${this.mostrarGasto()}.\nFecha: ${fechaGasto}\nEtiquetas:\n${textoEtiquetas}`
+    }
 }
 
 function listarGastos()
