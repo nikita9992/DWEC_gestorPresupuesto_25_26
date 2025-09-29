@@ -129,24 +129,39 @@ function listarGastos()
     return gastos;
 }
 
-function anyadirGasto()
+function anyadirGasto(gasto)
 {
-
+    gasto.id = idGasto;
+    idGasto++;
+    gastos.push(gasto);
 }
 
-function borrarGasto()
-{
-
+function borrarGasto(idGastoBorrar)
+{   
+    let idInList = false;
+    for(let i = 0; i < gastos.length && !idInList; i++)
+    {
+        if(gastos[i].id == idGastoBorrar)
+        {
+            idInList = true;
+            gastos.splice(i, 1);
+        }
+    }
 }
 
 function calcularTotalGastos()
 {
-
+    let suma = 0;
+    for (let i = 0; i < gastos.length; i++)
+    {
+        suma += gastos[i].valor
+    }
+    return suma;
 }
 
 function calcularBalance()
 {
-
+    return presupuesto - calcularTotalGastos();
 }
 // NO MODIFICAR A PARTIR DE AQUÍ: exportación de funciones y objetos creados para poder ejecutar los tests.
 // Las funciones y objetos deben tener los nombres que se indican en el enunciado
