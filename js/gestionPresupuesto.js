@@ -47,9 +47,6 @@ function CrearGasto(descripcion, valor, fecha, ...listaEtiquetas) {
 
     this.etiquetas = [];
 
-    
-
-
     this.anyadirEtiquetas = function(...nuevasEtiquetas)
     {
         for (let i=0; i < nuevasEtiquetas.length; i++)
