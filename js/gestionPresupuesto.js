@@ -179,9 +179,88 @@ function calcularBalance()
     return presupuesto - calcularTotalGastos();
 }
 
-function filtrarGastos()
+function filtrarGastos(filtro)
 {
+    if (!filtro)
+    {
+        return gastos;
+    }
 
+    let gastosFiltrados = gastos.filter(function(gasto){
+        let cumpleCond = true;
+        if (filtro.fechaDesde)
+        {
+            let fechaDesde = Date.parse(filtro.fechaDesde)
+            if(!isNaN(fechaDesde)){
+                if(gasto.fecha < fechaDesde)
+                {
+                    cumpleCond = false;
+                }
+            }
+        }
+        if (filtro.fechaHasta)
+        {
+            let fechaHasta = Date.parse(filtro.fechaHasta)
+            if(!isNaN(fechaHasta))
+            {
+                if(gasto.fecha > fechaHasta)
+                {
+                    cumpleCond = false;
+                }
+            }
+            
+        }
+        if (!isNaN(filtro.valorMinimo))
+        {
+            if(gasto.valor < filtro.valorMinimo)
+            {
+                cumpleCond = false;
+            }
+        }
+        if (!isNaN(filtro.valorMaximo))
+        {
+            if(gasto.valor > filtro.valorMaximo)
+            {
+                cumpleCond = false;
+            }
+        }
+        if (filtro.descripcionContiene)
+        {
+            let textoFiltro = filtro.descripcionContiene.toLowerCase();
+            let textoGasto = gasto.descripcion.toLowerCase();
+            if(!textoGasto.includes(textoFiltro))
+            {
+                cumpleCond = false;
+            }
+        }
+        if(Array.isArray(filtro.etiquetasTiene) && filtro.etiquetasTiene.length > 0)
+        {
+            let etiquetasFiltro = [];
+            for(let i = 0; i < filtro.etiquetasTiene.length; i++)
+            {
+                etiquetasFiltro.push(filtro.etiquetasTiene[i].toLowerCase())
+            }   
+            let etiquetasGasto = [];
+            for(let j = 0; j < gasto.etiquetas.length; j++)
+            {
+                etiquetasGasto.push(gasto.etiquetas[j].toLowerCase())
+            } 
+            let estaEnLista = false;
+            for(let k = 0; k < etiquetasFiltro.length; k++)
+            {
+                if(etiquetasGasto.includes(etiquetasFiltro[k]))
+                {
+                    estaEnLista = true;
+                }
+            }
+            if(!estaEnLista)
+            {
+                cumpleCond = false;
+            }
+        }
+        return cumpleCond;
+    })
+    return gastosFiltrados;
 }
 
 function agruparGastos()
