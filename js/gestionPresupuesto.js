@@ -233,7 +233,7 @@ function filtrarGastos(filtro)
                 cumpleCond = false;
             }
         }
-        if(Array.isArray(filtro.etiquetasTiene) && filtro.etiquetasTiene.length > 0)
+        if(filtro.etiquetasTiene && filtro.etiquetasTiene.length > 0)
         {
             let etiquetasFiltro = [];
             for(let i = 0; i < filtro.etiquetasTiene.length; i++)
@@ -263,9 +263,36 @@ function filtrarGastos(filtro)
     return gastosFiltrados;
 }
 
-function agruparGastos()
+function agruparGastos(periodo, etiquetas, fechaDesde, fechaHasta)
 {
+    let filtro = {};
+    if (fechaDesde)
+    {
+        filtro.fechaDesde = fechaDesde;
+    }
+    if (fechaHasta)
+    {
+        filtro.fechaHasta = fechaHasta;
+    }
+    if (etiquetas && etiquetas.length > 0)
+    {
+        filtro.etiquetasTiene = etiquetas;
+    }
+    let gastosFiltrados = filtrarGastos(filtro)
 
+    let resultado = gastosFiltrados.reduce(function(acumulador, gasto)
+    {
+        let periodoGasto = gasto.obtenerPeriodoAgrupacion(periodo)
+
+        if(!acumulador[periodoGasto])
+        {
+            acumulador[periodoGasto] = 0;
+        }
+
+        acumulador[periodoGasto] += gasto.valor;
+        return acumulador;
+    }, {})
+    return resultado;
 }
 
 // NO MODIFICAR A PARTIR DE AQUÍ: exportación de funciones y objetos creados para poder ejecutar los tests.
