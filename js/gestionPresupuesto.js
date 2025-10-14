@@ -191,24 +191,19 @@ function filtrarGastos(filtro)
         if (filtro.fechaDesde)
         {
             let fechaDesde = Date.parse(filtro.fechaDesde)
-            if(!isNaN(fechaDesde)){
-                if(gasto.fecha < fechaDesde)
-                {
-                    cumpleCond = false;
-                }
+            if(isNaN(fechaDesde) || gasto.fecha < fechaDesde)
+            {
+                cumpleCond = false;
             }
         }
         if (filtro.fechaHasta)
         {
             let fechaHasta = Date.parse(filtro.fechaHasta)
-            if(!isNaN(fechaHasta))
+            if(isNaN(fechaHasta) || gasto.fecha > fechaHasta)
             {
-                if(gasto.fecha > fechaHasta)
-                {
-                    cumpleCond = false;
-                }
+                cumpleCond = false;
+             
             }
-            
         }
         if (!isNaN(filtro.valorMinimo))
         {
