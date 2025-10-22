@@ -26,3 +26,10 @@ gPW.mostrarDatoEnId("gastos-totales", gastosTotales);
 let balance = gP.calcularBalance()
 
 gPW.mostrarDatoEnId("balance-total", balance);
+
+let listaGastos = gP.listarGastos();
+
+for (let i = 0; i < listaGastos.length; i++)
+{
+    gPW.mostrarGastoWeb("listado-gastos-completo", listaGastos[i])
+}
