@@ -1,3 +1,5 @@
+
+
 function mostrarDatoEnId(idElemento, valor)
 {
     let elemento = document.getElementById(idElemento);
@@ -47,9 +49,36 @@ function mostrarGastoWeb(idElemento, gasto)
 
 }
 
-function mostrarGastosAgrupadosWeb()
+function mostrarGastosAgrupadosWeb(idElemento, agrup, periodo)
 {
-
+    let elemento = document.getElementById(idElemento)
+    if (!elemento)
+    {
+        return;
+    }
+    periodo = periodo.toLowerCase()
+    if (periodo === "dia")
+        periodo = "día";
+    if (periodo === "anyo")
+        periodo = "año";
+    if (periodo === "día" || periodo === "mes" || periodo === "año")
+    {
+        let htmlArgup = `
+            <div class="agrupacion">
+                <h1>Gastos agrupados por ${periodo}</h1>`
+        for (let [clave, valor] of Object.entries(agrup))
+        {
+            htmlArgup += `
+                <div class="agrupacion-dato">
+                    <span class="agrupacion-dato-clave">${clave}</span>
+                    <span class="agrupacion-dato-valor">${valor}</span>
+                </div>`;
+        }
+        htmlArgup += `
+            </div>`;
+        
+        elemento.insertAdjacentHTML('beforeend', htmlArgup);
+    }
 }
 
 

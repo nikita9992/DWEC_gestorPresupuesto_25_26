@@ -31,5 +31,39 @@ let listaGastos = gP.listarGastos();
 
 for (let i = 0; i < listaGastos.length; i++)
 {
-    gPW.mostrarGastoWeb("listado-gastos-completo", listaGastos[i])
+    gPW.mostrarGastoWeb("listado-gastos-completo", listaGastos[i]);
 }
+
+let gastosFiltrados1 = gP.filtrarGastos({fechaDesde: "2021-09-01", fechaHasta: "2021-09-30"});
+for (let i = 0; i < gastosFiltrados1.length; i++)
+{
+    gPW.mostrarGastoWeb("listado-gastos-filtrado-1", gastosFiltrados1[i]);
+}
+
+let gastosFiltrados2 = gP.filtrarGastos({valorMinimo: 50});
+for (let i = 0; i < gastosFiltrados2.length; i++)
+{
+    gPW.mostrarGastoWeb("listado-gastos-filtrado-2", gastosFiltrados2[i]);
+}
+
+let gastosFiltrados3 = gP.filtrarGastos({valorMinimo: 200, etiquetasTiene: ["seguros"]});
+for (let i = 0; i < gastosFiltrados3.length; i++)
+{
+    gPW.mostrarGastoWeb("listado-gastos-filtrado-3", gastosFiltrados3[i]);
+}
+
+
+let gastosFiltrados4 = gP.filtrarGastos({valorMaximo: 50, etiquetasTiene: ["comida", "transporte"]});
+for (let i = 0; i < gastosFiltrados4.length; i++)
+{
+    gPW.mostrarGastoWeb("listado-gastos-filtrado-4", gastosFiltrados4[i]);
+}
+
+let gastosAgrupadosDia = gP.agruparGastos("dia");
+gPW.mostrarGastosAgrupadosWeb("agrupacion-dia", gastosAgrupadosDia, "dia")
+
+let gastosAgrupadosMes = gP.agruparGastos("mes");
+gPW.mostrarGastosAgrupadosWeb("agrupacion-mes", gastosAgrupadosMes, "mes")
+
+let gastosAgrupadosAnyo = gP.agruparGastos("anyo");
+gPW.mostrarGastosAgrupadosWeb("agrupacion-anyo", gastosAgrupadosAnyo, "anyo")
