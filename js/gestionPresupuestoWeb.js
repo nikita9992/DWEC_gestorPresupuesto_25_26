@@ -19,17 +19,17 @@ function mostrarGastoWeb(idElemento, gasto)
     let divGastoDescripcion = document.createElement("div");
     divGastoDescripcion.className = "gasto-descripcion";
     divGastoDescripcion.textContent = gasto.descripcion;
-    divGasto.appendChild(divGastoDescripcion);
+    divGasto.append(divGastoDescripcion);
 
     let divGastoFecha = document.createElement("div");
     divGastoFecha.className = "gasto-fecha";
     divGastoFecha.textContent = gasto.fecha;
-    divGasto.appendChild(divGastoFecha);
+    divGasto.append(divGastoFecha);
 
     let divGastoValor = document.createElement("div");
     divGastoValor.className = "gasto-valor";
     divGastoValor.textContent = gasto.valor;
-    divGasto.appendChild(divGastoValor);
+    divGasto.append(divGastoValor);
 
     let divGastoEtiquetas = document.createElement("div");
     divGastoEtiquetas.className = "gasto-etiquetas";
@@ -41,11 +41,11 @@ function mostrarGastoWeb(idElemento, gasto)
             let spanEtiqueta = document.createElement("span");
             spanEtiqueta.className = "gasto-etiquetas-etiqueta";
             spanEtiqueta.textContent = gasto.etiquetas[i];
-            divGastoEtiquetas.appendChild(spanEtiqueta);
+            divGastoEtiquetas.append(spanEtiqueta);
         }
     }
-    divGasto.appendChild(divGastoEtiquetas);
-    elemento.appendChild(divGasto);
+    divGasto.append(divGastoEtiquetas);
+    elemento.append(divGasto);
 
 }
 
