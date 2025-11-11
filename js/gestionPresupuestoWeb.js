@@ -111,6 +111,10 @@ function actualizarPresupuestoWeb()
     repintar();
 }
 
+let btnactualizarpresupuesto = document.getElementById("actualizarpresupuesto");
+btnactualizarpresupuesto.addEventListener("click", actualizarPresupuestoWeb);
+
+
 export
 {
     mostrarDatoEnId,
