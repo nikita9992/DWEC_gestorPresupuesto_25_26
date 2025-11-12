@@ -116,58 +116,55 @@ btnactualizarpresupuesto.addEventListener("click", actualizarPresupuestoWeb);
 
 function nuevoGastoWeb()
 {
-    let valido = false;
-    while (valido = false)
-    {
-        let descripcion = prompt("Introduzca un descripcion de gasto");
-        if (descripcion !== undefined)
+    
+    let descripcion = prompt("Introduzca un descripcion de gasto");
+    if (descripcion !== null && descripcion !== "")
+    {    
+        let valor = prompt("Introduzca un valor de gasto");
+        valor = parseFloat(valor);        
+        if (!isNaN(valor) && valor >= 0)
         {
-            while (valido = false)
+            let fecha = prompt("Introduzca una fecha de gasto con formato yyyy-mm-dd");
+            let fechaNueva = Date.parse(fecha);
+            if (!isNaN(fechaNueva))
             {
-                let valor = prompt("Introduzca un valor de gasto");
-                valor = parseFloat(valor)
-                
-                if (!isNaN(valor) && valor >= 0)
+ 
+                let etiquetas = prompt("Introduzca etiquetas de gasto con formato etiqueta1,etiqueta2,etiqueta3");
+                let listaEtiquetas = etiquetas.split(",")
+                if(listaEtiquetas.length > 0)
                 {
-                    while(valido = false)
-                    {
-                        let fecha = prompt("Introduzca una fecha de gasto con formato yyyy-mm-dd");
-                        let fechaNueva = Date.parse(fecha);
-                        if (!isNaN(fechaNueva))
-                        {
-                            while(valido = false)
-                            {
-                                let etiquetas = prompt("Introduzca etiquetas de gasto con formato etiqueta1,etiqueta2,etiqueta3");
-                                let listaEtiquetas = etiquetas.split(",")
-                                if(listaEtiquetas.length > 0)
-                                {
-                                    gP.CrearGasto(descripcion, valor, fecha, ...listaEtiquetas);
-                                    valido = true;
-                                }
-                                else
-                                {
-                                    alert("Introduzca por lo menos una etiqueta de gasto");
-                                }
-                            }
-                        } 
-                        else
-                        {
-                            alert("Formato incorrecto");
-                        }
-                    }            
+                    let gastoNuevo = new gP.CrearGasto(descripcion, valor, fecha, ...listaEtiquetas);
+                    gP.anyadirGasto(gastoNuevo);
+                    repintar();
+
                 }
-                else
-                {
-                    alert("Formato incorrecto");
+                else {
+                    alert("Introduzca por lo menos una etiqueta de gasto");
+                    return;
                 }
+                    
             }
+            else
+            {
+                alert("Formato Incorrecto");
+                return;
+            } 
         }
-        else
+        else 
         {
-            alert("Debes introducir un descripción")
+            alert("Formato Incorrecto");
+            return;
         }
     }
+    else
+    {
+        alert("Introduzca un descripción de gasto");
+        return;
+    } 
 }
+
+let btnAnyadirGasto = document.getElementById("anyadirgasto");
+btnAnyadirGasto.addEventListener("click", nuevoGastoWeb);
 
 export
 {
