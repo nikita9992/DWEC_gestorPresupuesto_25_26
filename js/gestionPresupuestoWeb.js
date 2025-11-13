@@ -41,6 +41,7 @@ function mostrarGastoWeb(idElemento, gasto)
             let spanEtiqueta = document.createElement("span");
             spanEtiqueta.className = "gasto-etiquetas-etiqueta";
             spanEtiqueta.textContent = `${gasto.etiquetas[i]} `;
+            
             divGastoEtiquetas.append(spanEtiqueta);
         }
     }
@@ -227,6 +228,16 @@ function BorrarHandle()
     this.handleEvent = function()
     {
         gP.borrarGasto(this.gasto.id);
+        repintar();
+    }
+}
+
+function BorrarEtiquetasHandle()
+{
+    this.handleEvent = function(event)
+    {
+        let etiqueta = event.target.textContent.trim();
+        this.gasto.borrarEtiquetas(etiqueta);
         repintar();
     }
 }
