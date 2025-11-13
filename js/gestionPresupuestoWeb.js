@@ -40,13 +40,24 @@ function mostrarGastoWeb(idElemento, gasto)
         {
             let spanEtiqueta = document.createElement("span");
             spanEtiqueta.className = "gasto-etiquetas-etiqueta";
-            spanEtiqueta.textContent = gasto.etiquetas[i];
+            spanEtiqueta.textContent = `${gasto.etiquetas[i]} `;
             divGastoEtiquetas.append(spanEtiqueta);
         }
     }
     divGasto.append(divGastoEtiquetas);
-    elemento.append(divGasto);
 
+    if (idElemento === "listado-gastos-completo")
+    {
+        let boton = document.createElement("button");
+        boton.setAttribute("type", "button");
+        boton.className = "gasto-editar"
+        boton.textContent = `Editar Gasto`;
+        let editarGasto = new EditarHandle();
+        editarGasto.gasto = gasto;
+        boton.addEventListener("click", editarGasto);
+        divGasto.append(boton);      
+    }
+    elemento.append(divGasto);
 }
 
 function mostrarGastosAgrupadosWeb(idElemento, agrup, periodo)
@@ -198,13 +209,12 @@ function EditarHandle()
         this.gasto.anyadirEtiquetas(...listaEtiquetas);
     
         repintar();
-    }
-    
+    }   
 }
 
 export
 {
     mostrarDatoEnId,
     mostrarGastoWeb,
-    mostrarGastosAgrupadosWeb
+    mostrarGastosAgrupadosWeb,
 }

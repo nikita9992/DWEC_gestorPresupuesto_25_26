@@ -60,10 +60,11 @@ for (let i = 0; i < gastosFiltrados4.length; i++)
 }
 
 let gastosAgrupadosDia = gP.agruparGastos("dia");
-gPW.mostrarGastosAgrupadosWeb("agrupacion-dia", gastosAgrupadosDia, "dia")
+gPW.mostrarGastosAgrupadosWeb("agrupacion-dia", gastosAgrupadosDia, "dia");
 
 let gastosAgrupadosMes = gP.agruparGastos("mes");
-gPW.mostrarGastosAgrupadosWeb("agrupacion-mes", gastosAgrupadosMes, "mes")
+gPW.mostrarGastosAgrupadosWeb("agrupacion-mes", gastosAgrupadosMes, "mes");
 
 let gastosAgrupadosAnyo = gP.agruparGastos("anyo");
-gPW.mostrarGastosAgrupadosWeb("agrupacion-anyo", gastosAgrupadosAnyo, "anyo")
+gPW.mostrarGastosAgrupadosWeb("agrupacion-anyo", gastosAgrupadosAnyo, "anyo");
+
