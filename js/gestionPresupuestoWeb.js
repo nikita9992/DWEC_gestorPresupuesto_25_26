@@ -57,10 +57,18 @@ function mostrarGastoWeb(idElemento, gasto)
         botonEditar.addEventListener("click", editarGasto);
         divGasto.append(botonEditar);  
         
-         
+        let botonBorrar = document.createElement("button");
+        botonBorrar.setAttribute("type", "button");
+        botonBorrar.className = "gasto-borrar";
+        botonBorrar.textContent = "Borrar Gasto"
+        let borrarGasto = new BorrarHandle();
+        borrarGasto.gasto = gasto;
+        botonBorrar.addEventListener("click", borrarGasto);
+        divGasto.append(botonBorrar);
     }
     elemento.append(divGasto);
 }
+
 
 function mostrarGastosAgrupadosWeb(idElemento, agrup, periodo)
 {
