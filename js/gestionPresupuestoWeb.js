@@ -118,53 +118,89 @@ function nuevoGastoWeb()
 {
     
     let descripcion = prompt("Introduzca un descripcion de gasto");
-    if (descripcion !== null && descripcion !== "")
+    if (descripcion === null || descripcion === "")
     {    
-        let valor = prompt("Introduzca un valor de gasto");
-        valor = parseFloat(valor);        
-        if (!isNaN(valor) && valor >= 0)
-        {
-            let fecha = prompt("Introduzca una fecha de gasto con formato yyyy-mm-dd");
-            let fechaNueva = Date.parse(fecha);
-            if (!isNaN(fechaNueva))
-            {
- 
-                let etiquetas = prompt("Introduzca etiquetas de gasto con formato etiqueta1,etiqueta2,etiqueta3");
-                let listaEtiquetas = etiquetas.split(",")
-                if(listaEtiquetas.length > 0)
-                {
-                    let gastoNuevo = new gP.CrearGasto(descripcion, valor, fecha, ...listaEtiquetas);
-                    gP.anyadirGasto(gastoNuevo);
-                    repintar();
-
-                }
-                else {
-                    alert("Introduzca por lo menos una etiqueta de gasto");
-                    return;
-                }
-                    
-            }
-            else
-            {
-                alert("Formato Incorrecto");
-                return;
-            } 
-        }
-        else 
-        {
-            alert("Formato Incorrecto");
-            return;
-        }
-    }
-    else
-    {
         alert("Introduzca un descripción de gasto");
+        return; 
+    }
+    let valor = prompt("Introduzca un valor de gasto");
+    valor = parseFloat(valor);        
+    if (isNaN(valor) || valor < 0)
+    {
+        alert("Formato Incorrecto");
         return;
     } 
+    let fecha = prompt("Introduzca una fecha de gasto con formato yyyy-mm-dd");
+    let fechaNueva = Date.parse(fecha);
+        
+    if (isNaN(fechaNueva)) 
+    {
+        alert("Formato de fecha Incorrecto");
+        return;
+    }
+
+    let etiquetas = prompt("Introduzca etiquetas de gasto con formato etiqueta1,etiqueta2,etiqueta3");
+    let listaEtiquetas = etiquetas.split(",");
+    if(listaEtiquetas.length === 1 && listaEtiquetas[0] === "")
+    {
+        alert("Introduzca por lo menos una etiqueta de gasto");
+        return; 
+    }
+    let gastoNuevo = new gP.CrearGasto(descripcion, valor, fecha, ...listaEtiquetas);
+    gP.anyadirGasto(gastoNuevo);
+    repintar();
 }
 
 let btnAnyadirGasto = document.getElementById("anyadirgasto");
 btnAnyadirGasto.addEventListener("click", nuevoGastoWeb);
+
+function EditarHandle()
+{
+    this.handleEvent = function(event)
+    {
+        let descripcion = prompt("Introduzca un descripcion de gasto", this.gasto.descripcion);
+        if (descripcion === null || descripcion === "")
+        {    
+            alert("Introduzca un descripción de gasto");
+            return; 
+        }
+        let valor = prompt("Introduzca un valor de gasto", this.gasto.valor);
+        valor = parseFloat(valor);        
+        if (isNaN(valor) || valor < 0)
+        {
+            alert("Formato Incorrecto");
+            return;
+        } 
+        let fechaGasto = new Date(this.gasto.fecha).toISOString().slice(0, 10);
+        let fecha = prompt("Introduzca una fecha de gasto con formato yyyy-mm-dd", fechaGasto);
+        let fechaNueva = Date.parse(fecha);
+        
+        if (isNaN(fechaNueva)) 
+        {
+             alert("Formato de fecha Incorrecto");
+             return;
+        }
+
+        let etiquetasGasto = this.gasto.etiquetas.join(',');
+        let etiquetas = prompt("Introduzca etiquetas de gasto con formato etiqueta1,etiqueta2,etiqueta3", etiquetasGasto);
+
+        let listaEtiquetas = etiquetas.split(",");
+        if(listaEtiquetas.length === 1 && listaEtiquetas[0] === "")
+        {
+            alert("Introduzca por lo menos una etiqueta de gasto");
+            return; 
+        }
+
+        this.gasto.actualizarDescripcion(descripcion);
+        this.gasto.actualizarValor(valor);
+        this.gasto.actualizarFecha(fecha);
+        this.gasto.borrarEtiquetas(...this.gasto.etiquetas); 
+        this.gasto.anyadirEtiquetas(...listaEtiquetas);
+    
+        repintar();
+    }
+    
+}
 
 export
 {
