@@ -48,14 +48,16 @@ function mostrarGastoWeb(idElemento, gasto)
 
     if (idElemento === "listado-gastos-completo")
     {
-        let boton = document.createElement("button");
-        boton.setAttribute("type", "button");
-        boton.className = "gasto-editar"
-        boton.textContent = `Editar Gasto`;
+        let botonEditar = document.createElement("button");
+        botonEditar.setAttribute("type", "button");
+        botonEditar.className = "gasto-editar"
+        botonEditar.textContent = "Editar Gasto";
         let editarGasto = new EditarHandle();
         editarGasto.gasto = gasto;
-        boton.addEventListener("click", editarGasto);
-        divGasto.append(boton);      
+        botonEditar.addEventListener("click", editarGasto);
+        divGasto.append(botonEditar);  
+        
+         
     }
     elemento.append(divGasto);
 }
@@ -210,6 +212,15 @@ function EditarHandle()
     
         repintar();
     }   
+}
+
+function BorrarHandle()
+{
+    this.handleEvent = function()
+    {
+        gP.borrarGasto(this.gasto.id);
+        repintar();
+    }
 }
 
 export
