@@ -23,7 +23,8 @@ function mostrarGastoWeb(idElemento, gasto)
 
     let divGastoFecha = document.createElement("div");
     divGastoFecha.className = "gasto-fecha";
-    divGastoFecha.textContent = gasto.fecha;
+    let fecha = new Date(gasto.fecha);
+    divGastoFecha.textContent = fecha.toISOString().slice(0, 10);
     divGasto.append(divGastoFecha);
 
     let divGastoValor = document.createElement("div");
@@ -246,6 +247,46 @@ function BorrarEtiquetasHandle()
         repintar();
     }
 }
+let btnAnyadirgastoFormulario = document.getElementById("anyadirgasto-formulario");
+function subHand(event)
+{
+    event.preventDefault();
+    let form = event.currentTarget;
+    let descripcion = form.elements["descripcion"].value.trim();
+    let valor = form.elements["valor"].value.trim();
+    valor = parseFloat(valor);
+    let fecha = form.elements["fecha"].value;
+    let etiquetas = form.elements["etiquetas"].value.trim();
+    let listaEtiquetas = etiquetas.split(",");
+    let gastoNuevo = new gP.CrearGasto(descripcion, valor, fecha, ...listaEtiquetas);
+    gP.anyadirGasto(gastoNuevo);
+    repintar();
+    form.remove();
+    btnAnyadirgastoFormulario.disabled = false;
+}
+
+function CancelarHandle()
+{
+    this.handleEvent = function(event){
+        let form = event.currentTarget.form;
+        form.remove();
+        btnAnyadirgastoFormulario.disabled = false;
+    }
+}
+
+function nuevoGastoWebFormulario(event)
+{
+    btnAnyadirgastoFormulario.disabled = true;
+    let plantillaFormulario = document.getElementById("formulario-template").content.cloneNode(true);
+    let formulario = plantillaFormulario.querySelector("form");
+    document.getElementById("controlesprincipales").append(plantillaFormulario);  
+    formulario.addEventListener("submit", subHand);
+    let btnCancelar = formulario.querySelector("button.cancelar");
+    let cancelar = new CancelarHandle();
+    btnCancelar.addEventListener("click", cancelar);
+}
+
+btnAnyadirgastoFormulario.addEventListener("click", nuevoGastoWebFormulario)
 
 export
 {

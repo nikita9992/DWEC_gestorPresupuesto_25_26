@@ -10,7 +10,7 @@ function actualizarPresupuesto(nuevoPresupuesto) {
     if(!isNaN(nuevoPresupuesto) && nuevoPresupuesto >= 0)
     {
         presupuesto = nuevoPresupuesto  
-        return presupuesto;
+        return presupuesto.toFixed(2);
     }
     else
     {
@@ -171,12 +171,13 @@ function calcularTotalGastos()
     {
         suma += gastos[i].valor
     }
-    return suma;
+    return suma.toFixed(2);
 }
 
 function calcularBalance()
 {
-    return presupuesto - calcularTotalGastos();
+    let balance = presupuesto - calcularTotalGastos();
+    return balance.toFixed(2);
 }
 
 function filtrarGastos(filtro)
