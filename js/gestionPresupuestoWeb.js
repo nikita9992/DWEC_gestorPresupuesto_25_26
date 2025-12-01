@@ -72,6 +72,8 @@ function mostrarGastoWeb(idElemento, gasto)
         borrarGasto.gasto = gasto;
         botonBorrar.addEventListener("click", borrarGasto);
         divGasto.append(botonBorrar);
+
+        
     }
     elemento.append(divGasto);
 }
@@ -270,7 +272,11 @@ function CancelarHandle()
     this.handleEvent = function(event){
         let form = event.currentTarget.form;
         form.remove();
-        btnAnyadirgastoFormulario.disabled = false;
+        if (this.btnCancelar)
+        {
+            this.btnCancelar.disabled = false;
+        }
+        
     }
 }
 
@@ -283,10 +289,15 @@ function nuevoGastoWebFormulario(event)
     formulario.addEventListener("submit", subHand);
     let btnCancelar = formulario.querySelector("button.cancelar");
     let cancelar = new CancelarHandle();
+    cancelar.btnCancelar = btnAnyadirgastoFormulario;
     btnCancelar.addEventListener("click", cancelar);
 }
 
 btnAnyadirgastoFormulario.addEventListener("click", nuevoGastoWebFormulario)
+
+
+
+
 
 export
 {
