@@ -73,7 +73,14 @@ function mostrarGastoWeb(idElemento, gasto)
         botonBorrar.addEventListener("click", borrarGasto);
         divGasto.append(botonBorrar);
 
-        
+        let btnEditarForm = document.createElement("button");
+        btnEditarForm.setAttribute("type", "button");
+        btnEditarForm.className = "gasto-editar-formulario";
+        btnEditarForm.textContent = "Editar (formulario)";
+        let editarForm = new EditarHandleFormulario();
+        editarForm.gasto = gasto;
+        btnEditarForm.addEventListener("click", editarForm);
+        divGasto.append(btnEditarForm);
     }
     elemento.append(divGasto);
 }
