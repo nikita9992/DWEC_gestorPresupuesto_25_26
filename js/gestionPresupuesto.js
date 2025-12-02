@@ -171,7 +171,7 @@ function calcularTotalGastos()
     {
         suma += gastos[i].valor
     }
-    return suma.toFixed(2);
+    return suma;
 }
 
 function calcularBalance()
