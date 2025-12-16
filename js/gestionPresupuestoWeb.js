@@ -338,8 +338,14 @@ function EditarHandleFormulario(){
     }
 }
 
-
-
+function filtrarGastosWeb()
+{
+    let listadoGastosCompleto = document.getElementById("listado-gastos-completo");
+    let form = document.getElementById("formulario-filtrado");
+    
+    
+}
+filtrarGastosWeb();
 
 export
 {
